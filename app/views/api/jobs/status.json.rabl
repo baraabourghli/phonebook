@@ -1,3 +1,3 @@
 object @status
 
-attributes :status, :num, :total
+attributes :status

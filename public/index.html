@@ -42,6 +42,7 @@
         <input type="text" class="form-control" ng-model="newName" placeholder="Name"/>
         <input type="text" class="form-control" ng-model="newNumber" placeholder="Number"/>
         <input type="button" value="Add" ng-click="onNewEntry()" ng-disabled="inProgress" class="btn btn-success"/>
+        <div ng-show="newError"> <strong>Warning!</strong> can't add new contact, check your input </div>
       </div>
       </br>
       </br>

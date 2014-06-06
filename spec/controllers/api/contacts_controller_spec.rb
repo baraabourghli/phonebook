@@ -7,6 +7,7 @@ describe Api::ContactsController do
   # Force json on each request
   before :each do
     request.env["HTTP_ACCEPT"] = 'application/json'
+    100.times { create(:contact) }
   end
 
   describe "GET index" do
@@ -18,7 +19,7 @@ describe Api::ContactsController do
     
     it "outputs all contacts" do
       get :index
-      expect(!!JSON.parse(response.body)).to be_true
+      expect(JSON.parse(response.body)).to have(100).item
     end
   end
 

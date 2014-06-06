@@ -27,9 +27,13 @@ angular.module('Phonebook', ['angularFileUpload'])
     };
     $http({method:'POST', url:'api/contacts.json', data: newEntry})
     .success(function(){
+      $scope.newError = false;
       $scope.phonebook.push(newEntry);
       $scope.newNumber = '';
       $scope.newName = '';
+    })
+    .error(function(){
+      $scope.newError = true;
     });
 
   }
