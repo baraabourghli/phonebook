@@ -37,7 +37,7 @@ class Api::ContactsController < ApiController
   end
   
   def download
-    file_name = 'phonebook.txt'
+    file_name = "phonebook_#{Time.now.to_i}.txt"
     file = File.open("public/data/#{file_name}", "w")
     Contact.all.find_each do |contact|
       file.write "#{contact.full_name}\t#{contact.number}\n"

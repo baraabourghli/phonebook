@@ -35,7 +35,22 @@ angular.module('PhoneBook', ['angularFileUpload'])
   }
 
   $scope.Edit = function(selectedEntry){
-    console.log(selectedEntry);
+    var updatedEntry = {
+      full_name:$scope.updatedName,
+      number:$scope.updatedNumber
+    };
+    $http({method:'PUT', url:'api/contacts/' + selectedEntry.id + '.json', data: updatedEntry})
+    .success(function(){
+      $scope.editMode = false;
+      refreshData()
+    });
+  };
+
+  $scope.Delete = function(selectedEntry){
+    $http({method:'DELETE', url:'api/contacts/' + selectedEntry.id + '.json'})
+    .success(function(){
+      refreshData()
+    });
   };
 
   $scope.onFileSelect = function($files) {

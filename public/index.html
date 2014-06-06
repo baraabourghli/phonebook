@@ -3,37 +3,48 @@
 <script type="text/javascript" src="vendors/angular-file-upload-shim.min.js"></script> 
 <script type="text/javascript" src="https://code.angularjs.org/1.2.9/angular.min.js"></script>
 <script type="text/javascript" src="vendors/angular-file-upload.min.js"></script>
-<script type="text/javascript" src="app.js">
-</script>
+<script type="text/javascript" src="app.js"></script>
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 
 
 </head>
   <body>
 
     <div ng-app="PhoneBook" ng-controller="ContactsCtrl">
-      <table>
+      <table class="table table-striped">
         <thead>
           <th>Name</th>
           <th>Number</th>
           <th></th>
+          <th></th>
         </thead>
         <tbody>
           <tr ng-repeat="entry in phonebook | orderBy:'full_name':''">
-            <td>{{entry.full_name}}</td>
-            <td>{{entry.number}}</td>
-            <td><a ng-click="editMode = !editMode" href="javascript:void(0);">Edit</a></td>
-            <td ng-show="editMode && !inProgress">
-              <input type="text" ng-model="updatedName" ng-init="updatedName = entry.full_name"/>
-              <input type="text" ng-model="updatedNumber" ng-init="updatedNumber = entry.number"/>
-              <input type="button" ng-click="Edit(entry)" />
+            <td ng-show="!editMode && !inProgress">{{entry.full_name}}</td>
+            <td ng-show="!editMode && !inProgress">{{entry.number}}</td>
+
+            <td ng-show="editMode && !inProgress" colspan=2 class="form-inline">
+              <input type="text" ng-model="updatedName" ng-init="updatedName = entry.full_name" class="form-control"/>
+              <input type="text" ng-model="updatedNumber" ng-init="updatedNumber = entry.number" class="form-control"/>
+              <input type="button" ng-click="Edit(entry)" value="Save" class="btn btn-success"/>
             </td>
+            <td><a ng-click="editMode = !editMode" href="javascript:void(0);" class="btn btn-success">Edit</a></td>
+            <td><a ng-click="Delete(entry)" href="javascript:void(0);" class="btn btn-danger">Delete</a></td>
           </tr>
         <tbody>
       </table>
-      <input type="text" ng-model="newName"/>
-      <input type="text" ng-model="newNumber"/>
-      <input type="button" value="submit" ng-click="onNewEntry()" ng-disabled="inProgress"/>
-      <a ng-href="{{downloadLink}}"> Download</a>
+      <div class="form-inline">
+        <input type="text" class="form-control" ng-model="newName" placeholder="Name"/>
+        <input type="text" class="form-control" ng-model="newNumber" placeholder="Number"/>
+        <input type="button" value="Add" ng-click="onNewEntry()" ng-disabled="inProgress" class="btn btn-success"/>
+      </div>
+      </br>
+      </br>
+      <div>
+        <a ng-href="{{downloadLink}}" class="btn btn-info"> Download</a>
+      </div>
+      </br>
       <input type="file" ng-file-select="onFileSelect($files)" ng-disabled="inProgress" onclick="this.value=null"/>
     </div>
     

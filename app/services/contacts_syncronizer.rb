@@ -3,14 +3,14 @@ class ContactsSyncronizer
   def self.sync(contacts)
     
     contacts_numbers = contacts.map { |c| c.number }
-    
+
     # handle deleted contacts
-    Contact.where("number NOT IN (?)", contacts_numbers).each do |contact|
-      contact.delete
+    Contact.where("number NOT IN (?)", contacts_numbers).find_each do |contact|
+      contact.destroy
     end
 
     # handle updated contacts
-    Contact.where("number IN (?)", contacts_numbers).each do |contact|
+    Contact.where("number IN (?)", contacts_numbers).find_each do |contact|
       contact.full_name =  contacts.detect { |c| c.number == contact.number }.full_name
       contact.save
     end
