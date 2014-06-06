@@ -54,7 +54,7 @@ test:
 production:
   adapter: postgresql
   encoding: unicode
-  database: phonebook_production
+  database: dcq9ocmigpr0j
   pool: 5
-  username: mindvalley
-  password:
+  username: fhispurujepwjj
+  password: 1kuDTFe8WbdxqxeBTK4jX6g6JU
