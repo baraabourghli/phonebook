@@ -1,0 +1,34 @@
+<html>
+<head>
+<script type="text/javascript" src="vendors/angular-file-upload-shim.min.js"></script> 
+<script type="text/javascript" src="https://code.angularjs.org/1.2.9/angular.min.js"></script>
+<script type="text/javascript" src="vendors/angular-file-upload.min.js"></script>
+<script type="text/javascript" src="app.js">
+</script>
+
+
+</head>
+  <body>
+
+    <div ng-app="PhoneBook" ng-controller="ContactsCtrl">
+          <div ng-repeat="entry in phonebook | orderBy:'full_name':''">
+            <div>{{entry.full_name}}</div>
+            <div>{{entry.number}}</div>
+            <a ng-click="editMode = !editMode" href="javascript:void(0);">Edit</a>
+            <div ng-show="editMode && !inProgress">
+              <input type="text" ng-model="updatedName" ng-init="updatedName = entry.full_name"/>
+              <input type="text" ng-model="updatedNumber" ng-init="updatedNumber = entry.number"/>
+              <input type="button" ng-click="Edit(entry)" />
+            </div>
+          </div>
+
+      <input type="text" ng-model="newName"/>
+      <input type="text" ng-model="newNumber"/>
+      <input type="button" value="submit" ng-click="onNewEntry()" ng-disabled="inProgress"/>
+      <a ng-href="{{downloadLink}}"> Download</a>
+      <input type="file" ng-file-select="onFileSelect($files)" ng-disabled="inProgress" onclick="this.value=null"/>
+    </div>
+    
+  </body>
+
+</html>
