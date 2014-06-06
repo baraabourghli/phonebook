@@ -60,7 +60,7 @@ angular.module('PhoneBook', ['angularFileUpload'])
           
           $http({
             method:'GET',
-            url:'api/workers/' + currentJob +'/status.json'
+            url:'api/jobs/' + currentJob +'/status.json'
           })
           .success(function(data){
             switch(data.status){
