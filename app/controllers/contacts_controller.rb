@@ -71,6 +71,16 @@ class ContactsController < ApplicationController
     send_file "public/data/#{file_name}", :type => :text
   end 
 
+  def upload
+    file = params[:phonebook].read.split("\n")  
+    file.each do |line|
+      full_name, number = line.split(/\t/)
+      Contact.create! full_name: full_name, number: number
+    end
+
+    redirect_to :back
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_contact
