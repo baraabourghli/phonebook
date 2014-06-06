@@ -9,11 +9,12 @@
   <title>Phonebook</title>
 </head>
   <body>
-    <div ng-app="PhoneBook" ng-controller="ContactsCtrl">
+    <div ng-app="Phonebook" ng-controller="ContactsCtrl" class='container'>
       <table class="table table-striped">
         <thead>
           <th>Name</th>
           <th>Number</th>
+          <th></th>
           <th></th>
           <th></th>
         </thead>
@@ -21,11 +22,11 @@
           <tr ng-repeat="entry in phonebook | orderBy:'full_name':''">
             <td>
               <span ng-show="!editMode && !inProgress">{{entry.full_name}}</span>
-              <input ng-show="editMode && !inProgress" type="text" ng-model="updatedName" ng-init="updatedName = entry.full_name" class="form-control"/>
+              <input ng-show="editMode && !inProgress" type="text" ng-model="entry.full_name" ng-init="updatedName = entry.full_name" class="form-control"/>
             </td>
             <td>
               <span ng-show="!editMode && !inProgress">{{entry.number}}</span>
-              <input ng-show="editMode && !inProgress" type="text" ng-model="updatedNumber" ng-init="updatedNumber = entry.number" class="form-control"/>
+              <input ng-show="editMode && !inProgress" type="text" ng-model="entry.number" ng-init="updatedNumber = entry.number" class="form-control"/>
             </td>
             <td>
               <input ng-show="editMode && !inProgress" type="button" ng-click="Edit(entry)" value="Save" class="btn btn-success"/>
@@ -48,6 +49,8 @@
         <a ng-href="{{downloadLink}}" class="btn btn-info"> Download</a>
       </div>
       </br>
+      </br>
+      <label class="col-sm-2 control-label">Upload Phonebook</label></br></br>
       <input type="file" ng-file-select="onFileSelect($files)" ng-disabled="inProgress" onclick="this.value=null"/>
     </div>
   </body>

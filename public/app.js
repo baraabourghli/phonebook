@@ -1,4 +1,4 @@
-angular.module('PhoneBook', ['angularFileUpload'])
+angular.module('Phonebook', ['angularFileUpload'])
 .controller('ContactsCtrl',['$scope','$http', '$upload','$interval', function($scope,$http, $upload,$interval){
   
   var currentJob = null; 
@@ -36,8 +36,8 @@ angular.module('PhoneBook', ['angularFileUpload'])
 
   $scope.Edit = function(selectedEntry){
     var updatedEntry = {
-      full_name:$scope.updatedName,
-      number:$scope.updatedNumber
+      full_name:selectedEntry.full_name,
+      number:selectedEntry.number
     };
     $http({method:'PUT', url:'api/contacts/' + selectedEntry.id + '.json', data: updatedEntry})
     .success(function(){
