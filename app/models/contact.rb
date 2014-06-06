@@ -1,6 +1,6 @@
 class Contact < ActiveRecord::Base
 
-  validates_presence_of :full_name, :number
-  validates_uniqeness_of :number
+  validates :full_name, :number, presence: true
+  validates :number, uniqueness: { case_sensitive: false }
 
 end

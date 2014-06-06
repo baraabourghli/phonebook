@@ -4,7 +4,7 @@ class ContactsController < ApplicationController
   # GET /contacts
   # GET /contacts.json
   def index
-    @contacts = Contact.all
+    @contacts = Contact.all.order(:number)
   end
 
   # GET /contacts/1
@@ -72,10 +72,30 @@ class ContactsController < ApplicationController
   end 
 
   def upload
-    file = params[:phonebook].read.split("\n")  
+    contacts = []
+    file = params[:phonebook].read.split(/\n/)
+    
     file.each do |line|
       full_name, number = line.split(/\t/)
-      Contact.create! full_name: full_name, number: number
+      contacts << Contact.new(full_name: full_name, number: number)
+    end
+    contacts_numbers = contacts.map { |c| c.number }
+    
+    # handle deleted contacts
+    Contact.where("number NOT IN (?)", contacts_numbers).each do |contact|
+      contact.delete
+    end
+
+    # handle updated contacts
+    Contact.where("number IN (?)", contacts_numbers).each do |contact|
+      contact.full_name =  contacts.detect { |c| c.number == contact.number }.full_name
+      contact.save
+    end
+
+    # handle new records
+    new_contacts = contacts.reject { |c| Contact.where(number: c.number).first.present? }
+    new_contacts.each do |contact| 
+      Contact.create!(full_name: contact.full_name, number: contact.number)
     end
 
     redirect_to :back
