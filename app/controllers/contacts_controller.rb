@@ -60,6 +60,16 @@ class ContactsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def download
+    file_name = 'phonebook.txt'
+    file = File.open("public/data/#{file_name}", "w")
+    Contact.all.find_each do |contact|
+      file.write "#{contact.full_name}\t#{contact.number}\n"
+    end
+    file.close
+    send_file "public/data/#{file_name}", :type => :text
+  end 
 
   private
     # Use callbacks to share common setup or constraints between actions.

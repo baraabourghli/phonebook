@@ -27,3 +27,8 @@
 <br>
 
 <%= link_to 'New Contact', new_contact_path %>
+
+<p>
+  Download:
+  <%= link_to "Download", download_contacts_path(format: "txt") %>
+</p>
