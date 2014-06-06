@@ -7,7 +7,6 @@ gem 'rails', '4.0.0'
 gem 'pg'
 
 gem 'rabl'
-gem 'draper', '~> 1.3'
 
 gem 'resque', :require => 'resque/server'
 gem 'resque-status'

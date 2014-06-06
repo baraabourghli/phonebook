@@ -11,17 +11,25 @@
   <body>
 
     <div ng-app="PhoneBook" ng-controller="ContactsCtrl">
-          <div ng-repeat="entry in phonebook | orderBy:'full_name':''">
-            <div>{{entry.full_name}}</div>
-            <div>{{entry.number}}</div>
-            <a ng-click="editMode = !editMode" href="javascript:void(0);">Edit</a>
-            <div ng-show="editMode && !inProgress">
+      <table>
+        <thead>
+          <th>Name</th>
+          <th>Number</th>
+          <th></th>
+        </thead>
+        <tbody>
+          <tr ng-repeat="entry in phonebook | orderBy:'full_name':''">
+            <td>{{entry.full_name}}</td>
+            <td>{{entry.number}}</td>
+            <td><a ng-click="editMode = !editMode" href="javascript:void(0);">Edit</a></td>
+            <td ng-show="editMode && !inProgress">
               <input type="text" ng-model="updatedName" ng-init="updatedName = entry.full_name"/>
               <input type="text" ng-model="updatedNumber" ng-init="updatedNumber = entry.number"/>
               <input type="button" ng-click="Edit(entry)" />
-            </div>
-          </div>
-
+            </td>
+          </tr>
+        <tbody>
+      </table>
       <input type="text" ng-model="newName"/>
       <input type="text" ng-model="newNumber"/>
       <input type="button" value="submit" ng-click="onNewEntry()" ng-disabled="inProgress"/>
