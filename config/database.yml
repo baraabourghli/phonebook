@@ -19,7 +19,7 @@ development:
   encoding: unicode
   database: phonebook_development
   pool: 5
-  username: phonebook
+  username: mindvalley
   password:
 
   # Connect on a TCP socket. Omitted by default since the client uses a
@@ -48,7 +48,7 @@ test:
   encoding: unicode
   database: phonebook_test
   pool: 5
-  username: phonebook
+  username: mindvalley
   password:
 
 production:
@@ -56,5 +56,5 @@ production:
   encoding: unicode
   database: phonebook_production
   pool: 5
-  username: phonebook
+  username: mindvalley
   password:
