@@ -1,3 +1,3 @@
 object @contact
 
-attributes :full_name, :number
+attributes :id, :full_name, :number

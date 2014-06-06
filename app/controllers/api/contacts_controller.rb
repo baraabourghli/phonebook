@@ -21,19 +21,18 @@ class Api::ContactsController < ApiController
   end
 
   def update
-    respond_to do |format|
-      if @contact.update(contact_params)
-        format.json { head :no_content }
-      else
-        format.json { render json: @contact.errors, status: :unprocessable_entity }
-      end
+    if @contact.update(contact_params)
+      head :no_content
+    else
+      render json: { api_error: @contact.errors, status: :unprocessable_entity }
     end
   end
 
   def destroy
-    @contact.destroy
-    respond_to do |format|
-      format.json { head :no_content }
+    if @contact.destroy
+      head :no_content
+    else
+      render json: { api_error: @contact.errors, status: :unprocessable_entity }
     end
   end
   
